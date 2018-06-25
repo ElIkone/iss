@@ -3,8 +3,10 @@ package com.example.ben.iss;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFrame;
@@ -33,6 +35,16 @@ class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
          myEditText = findViewById(R.id.tipValue);
          myButton = findViewById(R.id.getValueButton);
+         myButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if (myEditText.getText() != null) {
+                     String newString = myEditText.getText().toString();
+                     Toast.makeText(MainActivity.this,
+                             newString, Toast.LENGTH_LONG).show();
+                 }
+             }
+         });
          socket = new Socket(webUrl);
          socket.setListener(new BasicListener() {
              @Override
